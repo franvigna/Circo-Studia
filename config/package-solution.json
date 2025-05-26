@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "circo-studia-client-side-solution",
+    "id": "6906c713-6fb6-4a07-88a0-36aa81ff3cc7",
+    "version": "1.0.0.0",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.21.1"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Circo Studia description"
+      },
+      "longDescription": {
+        "default": "Circo Studia description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "circo-studia Feature",
+        "description": "The feature that activates elements of the circo-studia solution.",
+        "id": "c992fcf2-bc52-4632-96de-d5f9278bed70",
+        "version": "1.0.0.0"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/circo-studia.sppkg"
+  }
+}
