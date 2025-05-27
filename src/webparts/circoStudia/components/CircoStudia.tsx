@@ -1,43 +1,71 @@
 import * as React from 'react';
-import styles from './CircoStudia.module.scss';
 import type { ICircoStudiaProps } from './ICircoStudiaProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import { SPFI } from "@pnp/sp";
+import { ICircoStudia } from '../../../interfaces';
+import { getSP } from '../../../pnpjsConfig';
+import { useState } from 'react';
+import styles from './CircoStudia.module.scss';
 
-export default class CircoStudia extends React.Component<ICircoStudiaProps> {
-  public render(): React.ReactElement<ICircoStudiaProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
 
-    return (
-      <section className={`${styles.circoStudia} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
-        </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
-      </section>
-    );
+const CircoStudia =(props: ICircoStudiaProps) =>{
+const LOG_SOUCE ='Circo Studia Webpart';
+const LIST_NAME= 'Oferta_materias_TecWeb';
+let _sp:SPFI = getSP(props.context);
+
+const [circoStudiaItems,setcircoStudiaItems]= useState<ICircoStudia[]>([])
+
+const getCircoStudiaItems = async () => {
+  try {
+    const items = await _sp.web.lists
+    .getByTitle(LIST_NAME)
+    .items
+    .select("Id", "Title", "field_1", "field_2", "field_3", "field_4", "field_5")();
+    setcircoStudiaItems(items); 
+    console.log('console',_sp);
+    console.log('Items',items);
+  } catch (err) {
+    console.error(`${LOG_SOUCE} - Error al obtener ítems:`, err);
   }
-}
+};
+
+React.useEffect(() => {
+  const fetchData = async () => {
+    await getCircoStudiaItems();
+  };
+
+  void fetchData(); 
+}, []);
+
+return (
+<div className={styles.container}>
+      <h1 className={styles.title}>Oferta de Materias Tecnicatura en desarrollo web</h1>
+      <table className={styles.table}>
+        <thead>
+          <tr>
+            <th>Código</th>
+            <th>Materia</th>
+            <th>Comisión</th>
+            <th>Turno</th>
+            <th>Días</th>
+            <th>Modalidad</th>
+          </tr>
+        </thead>
+        <tbody>
+          {circoStudiaItems.map(item => (
+            <tr key={item.Id}>
+              <td>{item.Title}</td>
+              <td>{item.field_1}</td>
+              <td>{item.field_2}</td>
+              <td>{item.field_3}</td>
+              <td>{item.field_4}</td>
+              <td>{item.field_5}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
+);
+
+};
+export default CircoStudia;
+
