@@ -9,10 +9,19 @@
           "manifest": "./src/webparts/circoStudia/CircoStudiaWebPart.manifest.json"
         }
       ]
+    },
+    "oferta-materias-ing-inf-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/ofertaMateriasIngInf/OfertaMateriasIngInfWebPart.js",
+          "manifest": "./src/webparts/ofertaMateriasIngInf/OfertaMateriasIngInfWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
-    "CircoStudiaWebPartStrings": "lib/webparts/circoStudia/loc/{locale}.js"
+    "CircoStudiaWebPartStrings": "lib/webparts/circoStudia/loc/{locale}.js",
+    "OfertaMateriasIngInfWebPartStrings": "lib/webparts/ofertaMateriasIngInf/loc/{locale}.js"
   }
 }
