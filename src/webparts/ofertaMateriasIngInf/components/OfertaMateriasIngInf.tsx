@@ -1,43 +1,86 @@
-import * as React from 'react';
-import styles from './OfertaMateriasIngInf.module.scss';
-import type { IOfertaMateriasIngInfProps } from './IOfertaMateriasIngInfProps';
-import { escape } from '@microsoft/sp-lodash-subset';
+import * as React from 'react'
+import styles from './OfertaMateriasIngInf.module.scss'
+import { SPFI } from '@pnp/sp'
+import { IOfertaMateriasIngInf } from '../../../interfaces'
+import { getSP } from '../../../pnpjsConfig'
+import { useState, useEffect } from 'react'
+import type { IOfertaMateriasIngInfProps } from './IOfertaMateriasIngInfProps'
 
-export default class OfertaMateriasIngInf extends React.Component<IOfertaMateriasIngInfProps> {
-  public render(): React.ReactElement<IOfertaMateriasIngInfProps> {
-    const {
-      description,
-      isDarkTheme,
-      environmentMessage,
-      hasTeamsContext,
-      userDisplayName
-    } = this.props;
+const OfertaMateriasIngInf = (
+    props: IOfertaMateriasIngInfProps
+): JSX.Element => {
+    const LIST_NAME = 'Oferta_materias_IngInf'
+    console.log('Contexto recibido:', props.context)
+
+    const _sp: SPFI = getSP(props.context)
+
+    const [items, setItems] = useState<IOfertaMateriasIngInf[]>([])
+
+    const fetchItems = async (): Promise<void> => {
+        try {
+            console.log('Conectando a la lista:', LIST_NAME)
+
+            const listItems = await _sp.web.lists
+                .getByTitle(LIST_NAME)
+                .items.select(
+                    'Id',
+                    'Title', // CodMateria
+                    'field_1', // Descripción
+                    'field_2', // Comisión
+                    'field_3', // Turno
+                    'field_4', // Días
+                    'field_5' // Modalidad
+                )()
+            setItems(listItems)
+
+            console.log('Items obtenidos:', listItems)
+            console.log('Primer item:', listItems[0])
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        } catch (error: any) {
+            console.error('Error al obtener ítems:', error)
+            alert(
+                'Error al obtener ítems: ' +
+                    (error?.message || JSON.stringify(error))
+            )
+        }
+    }
+
+    useEffect(() => {
+        // eslint-disable-next-line no-void
+        void fetchItems()
+    }, [])
 
     return (
-      <section className={`${styles.ofertaMateriasIngInf} ${hasTeamsContext ? styles.teams : ''}`}>
-        <div className={styles.welcome}>
-          <img alt="" src={isDarkTheme ? require('../assets/welcome-dark.png') : require('../assets/welcome-light.png')} className={styles.welcomeImage} />
-          <h2>Well done, {escape(userDisplayName)}!</h2>
-          <div>{environmentMessage}</div>
-          <div>Web part property value: <strong>{escape(description)}</strong></div>
+        <div className={styles.container}>
+            <h1 className={styles.title}>
+                Oferta de Materias Ingeniería en Informática
+            </h1>
+            <table className={styles.table}>
+                <thead>
+                    <tr>
+                        <th>Código</th>
+                        <th>Descripción</th>
+                        <th>Comisión</th>
+                        <th>Turno</th>
+                        <th>Días</th>
+                        <th>Modalidad</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {items.map((item) => (
+                        <tr key={item.Id}>
+                            <td>{item.Title}</td>
+                            <td>{item.field_1}</td>
+                            <td>{item.field_2}</td>
+                            <td>{item.field_3}</td>
+                            <td>{item.field_4}</td>
+                            <td>{item.field_5}</td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
         </div>
-        <div>
-          <h3>Welcome to SharePoint Framework!</h3>
-          <p>
-            The SharePoint Framework (SPFx) is a extensibility model for Microsoft Viva, Microsoft Teams and SharePoint. It&#39;s the easiest way to extend Microsoft 365 with automatic Single Sign On, automatic hosting and industry standard tooling.
-          </p>
-          <h4>Learn more about SPFx development:</h4>
-          <ul className={styles.links}>
-            <li><a href="https://aka.ms/spfx" target="_blank" rel="noreferrer">SharePoint Framework Overview</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-graph" target="_blank" rel="noreferrer">Use Microsoft Graph in your solution</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-teams" target="_blank" rel="noreferrer">Build for Microsoft Teams using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-viva" target="_blank" rel="noreferrer">Build for Microsoft Viva Connections using SharePoint Framework</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-store" target="_blank" rel="noreferrer">Publish SharePoint Framework applications to the marketplace</a></li>
-            <li><a href="https://aka.ms/spfx-yeoman-api" target="_blank" rel="noreferrer">SharePoint Framework API reference</a></li>
-            <li><a href="https://aka.ms/m365pnp" target="_blank" rel="noreferrer">Microsoft 365 Developer Community</a></li>
-          </ul>
-        </div>
-      </section>
-    );
-  }
+    )
 }
+
+export default OfertaMateriasIngInf

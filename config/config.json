@@ -17,11 +17,20 @@
           "manifest": "./src/webparts/ofertaMateriasIngInf/OfertaMateriasIngInfWebPart.manifest.json"
         }
       ]
+    },
+    "plan-de-estudio-ing-inf-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/planDeEstudioIngInf/PlanDeEstudioIngInfWebPart.js",
+          "manifest": "./src/webparts/planDeEstudioIngInf/PlanDeEstudioIngInfWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "CircoStudiaWebPartStrings": "lib/webparts/circoStudia/loc/{locale}.js",
-    "OfertaMateriasIngInfWebPartStrings": "lib/webparts/ofertaMateriasIngInf/loc/{locale}.js"
+    "OfertaMateriasIngInfWebPartStrings": "lib/webparts/ofertaMateriasIngInf/loc/{locale}.js",
+    "PlanDeEstudioIngInfWebPartStrings": "lib/webparts/planDeEstudioIngInf/loc/{locale}.js"
   }
 }

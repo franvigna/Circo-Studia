@@ -8,22 +8,22 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'OfertaMateriasIngInfWebPartStrings';
-import OfertaMateriasIngInf from './components/OfertaMateriasIngInf';
-import { IOfertaMateriasIngInfProps } from './components/IOfertaMateriasIngInfProps';
+import * as strings from 'PlanDeEstudioIngInfWebPartStrings';
+import PlanDeEstudioIngInf from './components/PlanDeEstudioIngInf';
+import { IPlanDeEstudioIngInfProps } from './components/IPlanDeEstudioIngInfProps';
 
-export interface IOfertaMateriasIngInfWebPartProps {
+export interface IPlanDeEstudioIngInfWebPartProps {
   description: string;
 }
 
-export default class OfertaMateriasIngInfWebPart extends BaseClientSideWebPart<IOfertaMateriasIngInfWebPartProps> {
+export default class PlanDeEstudioIngInfWebPart extends BaseClientSideWebPart<IPlanDeEstudioIngInfWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
   public render(): void {
-    const element: React.ReactElement<IOfertaMateriasIngInfProps> = React.createElement(
-      OfertaMateriasIngInf,
+    const element: React.ReactElement<IPlanDeEstudioIngInfProps> = React.createElement(
+      PlanDeEstudioIngInf,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,

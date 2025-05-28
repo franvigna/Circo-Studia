@@ -1,10 +1,10 @@
 import { WebPartContext } from "@microsoft/sp-webpart-base";
 
-export interface IOfertaMateriasIngInfProps {
+export interface IPlanDeEstudioIngInfProps {
   description: string;
   isDarkTheme: boolean;
   environmentMessage: string;
   hasTeamsContext: boolean;
   userDisplayName: string;
-  context: WebPartContext;
+  context: WebPartContext; // AGREGAR ESTO
 }
