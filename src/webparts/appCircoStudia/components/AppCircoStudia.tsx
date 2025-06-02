@@ -1,13 +1,14 @@
-// src/webparts/appCircoStudia/components/AppCircoStudia.tsx
 import * as React from 'react'
 import { IAppCircoStudiaProps } from './IAppCircoStudiaProps'
 import { Stack, Text, DefaultButton } from '@fluentui/react'
+import Home from '../../home/components/Home'
 import OfertaMaterias from '../../ofertaMateriasIngInf/components/OfertaMateriasIngInf'
 import PlanDeEstudio from '../../planDeEstudioIngInf/components/PlanDeEstudioIngInf'
 import HistorialAcademico from '../../historialAcademico/components/HistorialAcademico'
+import Perfil from '../../perfil/components/Perfil'
 
 const AppCircoStudia = (props: IAppCircoStudiaProps): JSX.Element => {
-    const [page, setPage] = React.useState('oferta')
+    const [page, setPage] = React.useState('home')
 
     const sharedProps = {
         context: props.context,
@@ -20,12 +21,16 @@ const AppCircoStudia = (props: IAppCircoStudiaProps): JSX.Element => {
 
     const renderPage = (): JSX.Element => {
         switch (page) {
+            case 'home':
+                return <Home {...sharedProps} />
             case 'oferta':
                 return <OfertaMaterias {...sharedProps} />
             case 'plan':
                 return <PlanDeEstudio {...sharedProps} />
             case 'historial':
                 return <HistorialAcademico {...sharedProps} />
+            case 'perfil':
+                return <Perfil {...sharedProps} />
             default:
                 return <Text>Seleccioná una sección</Text>
         }
@@ -44,6 +49,16 @@ const AppCircoStudia = (props: IAppCircoStudiaProps): JSX.Element => {
                     },
                 }}
             >
+                <DefaultButton
+                    text='Inicio'
+                    iconProps={{ iconName: 'Home' }}
+                    onClick={() => setPage('home')}
+                    styles={{
+                        root: {
+                            fontWeight: page === 'home' ? 'bold' : 'normal',
+                        },
+                    }}
+                />
                 <DefaultButton
                     text='Oferta'
                     iconProps={{ iconName: 'Education' }}
@@ -72,6 +87,16 @@ const AppCircoStudia = (props: IAppCircoStudiaProps): JSX.Element => {
                         root: {
                             fontWeight:
                                 page === 'historial' ? 'bold' : 'normal',
+                        },
+                    }}
+                />
+                <DefaultButton
+                    text='Perfil'
+                    iconProps={{ iconName: 'Contact' }}
+                    onClick={() => setPage('perfil')}
+                    styles={{
+                        root: {
+                            fontWeight: page === 'perfil' ? 'bold' : 'normal',
                         },
                     }}
                 />

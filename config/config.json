@@ -41,6 +41,22 @@
           "manifest": "./src/webparts/appCircoStudia/AppCircoStudiaWebPart.manifest.json"
         }
       ]
+    },
+    "perfil-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/perfil/PerfilWebPart.js",
+          "manifest": "./src/webparts/perfil/PerfilWebPart.manifest.json"
+        }
+      ]
+    },
+    "home-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/home/HomeWebPart.js",
+          "manifest": "./src/webparts/home/HomeWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
@@ -49,6 +65,8 @@
     "OfertaMateriasIngInfWebPartStrings": "lib/webparts/ofertaMateriasIngInf/loc/{locale}.js",
     "PlanDeEstudioIngInfWebPartStrings": "lib/webparts/planDeEstudioIngInf/loc/{locale}.js",
     "HistorialAcademicoWebPartStrings": "lib/webparts/historialAcademico/loc/{locale}.js",
-    "AppCircoStudiaWebPartStrings": "lib/webparts/appCircoStudia/loc/{locale}.js"
+    "AppCircoStudiaWebPartStrings": "lib/webparts/appCircoStudia/loc/{locale}.js",
+    "PerfilWebPartStrings": "lib/webparts/perfil/loc/{locale}.js",
+    "HomeWebPartStrings": "lib/webparts/home/loc/{locale}.js"
   }
 }
