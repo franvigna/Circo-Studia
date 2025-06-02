@@ -31,3 +31,11 @@ export interface IPlanDeEstudioIngInf {
         context: WebPartContext;
 
 }
+export interface IHistorialAcademico {
+  Id: number;
+  Title: string; // campo oculto que corresponde a "Título"
+  field_1: string; // Materia
+  field_2: string; // Fecha
+  field_3: number; // Nota
+  field_4: number; // Acta
+}

@@ -25,12 +25,22 @@
           "manifest": "./src/webparts/planDeEstudioIngInf/PlanDeEstudioIngInfWebPart.manifest.json"
         }
       ]
+    },
+    "historial-academico-web-part": {
+      "components": [
+        {
+          "entrypoint": "./lib/webparts/historialAcademico/HistorialAcademicoWebPart.js",
+          "manifest": "./src/webparts/historialAcademico/HistorialAcademicoWebPart.manifest.json"
+        }
+      ]
     }
   },
   "externals": {},
   "localizedResources": {
     "CircoStudiaWebPartStrings": "lib/webparts/circoStudia/loc/{locale}.js",
     "OfertaMateriasIngInfWebPartStrings": "lib/webparts/ofertaMateriasIngInf/loc/{locale}.js",
-    "PlanDeEstudioIngInfWebPartStrings": "lib/webparts/planDeEstudioIngInf/loc/{locale}.js"
+    "PlanDeEstudioIngInfWebPartStrings": "lib/webparts/planDeEstudioIngInf/loc/{locale}.js",
+    "HistorialAcademicoWebPartStrings": "lib/webparts/historialAcademico/loc/{locale}.js",
+    "ControlStrings": "node_modules/@pnp/spfx-controls-react/lib/loc/{locale}.js"
   }
 }
