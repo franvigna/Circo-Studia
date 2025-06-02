@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'CircoStudiaWebPartStrings';
 import CircoStudia from './components/CircoStudia';
 import { ICircoStudiaProps } from './components/ICircoStudiaProps';
+import { setupSP } from '../../pnpjsConfig'
 
 export interface ICircoStudiaWebPartProps {
   description: string;
@@ -37,12 +38,10 @@ export default class CircoStudiaWebPart extends BaseClientSideWebPart<ICircoStud
     ReactDom.render(element, this.domElement);
   }
 
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
-    });
-  }
-
+protected async onInit(): Promise<void> {
+  setupSP(this.context);
+  this._environmentMessage = await this._getEnvironmentMessage();
+}
 
 
   private _getEnvironmentMessage(): Promise<string> {

@@ -8,23 +8,23 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'PlanDeEstudioIngInfWebPartStrings';
-import PlanDeEstudioIngInf from './components/PlanDeEstudioIngInf';
-import { IPlanDeEstudioIngInfProps } from './components/IPlanDeEstudioIngInfProps';
+import * as strings from 'AppCircoStudiaWebPartStrings';
+import AppCircoStudia from './components/AppCircoStudia';
+import { IAppCircoStudiaProps } from './components/IAppCircoStudiaProps';
 import { setupSP } from '../../pnpjsConfig'
 
-export interface IPlanDeEstudioIngInfWebPartProps {
+export interface IAppCircoStudiaWebPartProps {
   description: string;
 }
 
-export default class PlanDeEstudioIngInfWebPart extends BaseClientSideWebPart<IPlanDeEstudioIngInfWebPartProps> {
+export default class AppCircoStudiaWebPart extends BaseClientSideWebPart<IAppCircoStudiaWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
   public render(): void {
-    const element: React.ReactElement<IPlanDeEstudioIngInfProps> = React.createElement(
-      PlanDeEstudioIngInf,
+    const element: React.ReactElement<IAppCircoStudiaProps> = React.createElement(
+      AppCircoStudia,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,
@@ -39,7 +39,7 @@ export default class PlanDeEstudioIngInfWebPart extends BaseClientSideWebPart<IP
   }
 
 protected async onInit(): Promise<void> {
-  setupSP(this.context);
+  setupSP(this.context); // ✅ Inicializa correctamente PnPjs
   this._environmentMessage = await this._getEnvironmentMessage();
 }
 

@@ -8,23 +8,23 @@ import {
 import { BaseClientSideWebPart } from '@microsoft/sp-webpart-base';
 import { IReadonlyTheme } from '@microsoft/sp-component-base';
 
-import * as strings from 'PlanDeEstudioIngInfWebPartStrings';
-import PlanDeEstudioIngInf from './components/PlanDeEstudioIngInf';
-import { IPlanDeEstudioIngInfProps } from './components/IPlanDeEstudioIngInfProps';
+import * as strings from 'HistorialAcademicoWebPartStrings';
+import HistorialAcademico from './components/HistorialAcademico';
+import { IHistorialAcademicoProps } from './components/IHistorialAcademicoProps';
 import { setupSP } from '../../pnpjsConfig'
 
-export interface IPlanDeEstudioIngInfWebPartProps {
+export interface IHistorialAcademicoWebPartProps {
   description: string;
 }
 
-export default class PlanDeEstudioIngInfWebPart extends BaseClientSideWebPart<IPlanDeEstudioIngInfWebPartProps> {
+export default class HistorialAcademicoWebPart extends BaseClientSideWebPart<IHistorialAcademicoWebPartProps> {
 
   private _isDarkTheme: boolean = false;
   private _environmentMessage: string = '';
 
   public render(): void {
-    const element: React.ReactElement<IPlanDeEstudioIngInfProps> = React.createElement(
-      PlanDeEstudioIngInf,
+    const element: React.ReactElement<IHistorialAcademicoProps> = React.createElement(
+      HistorialAcademico,
       {
         description: this.properties.description,
         isDarkTheme: this._isDarkTheme,

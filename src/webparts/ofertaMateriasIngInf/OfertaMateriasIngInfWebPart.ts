@@ -11,6 +11,7 @@ import { IReadonlyTheme } from '@microsoft/sp-component-base';
 import * as strings from 'OfertaMateriasIngInfWebPartStrings';
 import OfertaMateriasIngInf from './components/OfertaMateriasIngInf';
 import { IOfertaMateriasIngInfProps } from './components/IOfertaMateriasIngInfProps';
+import { setupSP } from '../../pnpjsConfig'
 
 export interface IOfertaMateriasIngInfWebPartProps {
   description: string;
@@ -37,11 +38,10 @@ export default class OfertaMateriasIngInfWebPart extends BaseClientSideWebPart<I
     ReactDom.render(element, this.domElement);
   }
 
-  protected onInit(): Promise<void> {
-    return this._getEnvironmentMessage().then(message => {
-      this._environmentMessage = message;
-    });
-  }
+protected async onInit(): Promise<void> {
+  setupSP(this.context);
+  this._environmentMessage = await this._getEnvironmentMessage();
+}
 
 
 
