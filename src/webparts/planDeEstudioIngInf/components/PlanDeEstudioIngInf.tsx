@@ -43,7 +43,7 @@ const PlanDeEstudioIngInf = (props: IPlanDeEstudioIngInfProps): JSX.Element => {
     return (
         <div className={styles.container}>
             <h1 className={styles.title}>
-                Plan de Estudio - Ingeniería en Informática
+                Plan de Estudio _ Ingeniería en Informática
             </h1>
             <table className={styles.table}>
                 <thead>
