@@ -1,8 +1,7 @@
 // src/webparts/appCircoStudia/components/AppCircoStudia.tsx
 import * as React from 'react'
 import { IAppCircoStudiaProps } from './IAppCircoStudiaProps'
-import { Stack, Text } from '@fluentui/react'
-import { Nav } from '@fluentui/react/lib/Nav'
+import { Stack, Text, DefaultButton } from '@fluentui/react'
 import OfertaMaterias from '../../ofertaMateriasIngInf/components/OfertaMateriasIngInf'
 import PlanDeEstudio from '../../planDeEstudioIngInf/components/PlanDeEstudioIngInf'
 import HistorialAcademico from '../../historialAcademico/components/HistorialAcademico'
@@ -10,16 +9,16 @@ import HistorialAcademico from '../../historialAcademico/components/HistorialAca
 const AppCircoStudia = (props: IAppCircoStudiaProps): JSX.Element => {
     const [page, setPage] = React.useState('oferta')
 
-    const renderPage = (): JSX.Element => {
-        const sharedProps = {
-            context: props.context,
-            description: props.description,
-            isDarkTheme: props.isDarkTheme,
-            environmentMessage: props.environmentMessage,
-            hasTeamsContext: props.hasTeamsContext,
-            userDisplayName: props.userDisplayName,
-        }
+    const sharedProps = {
+        context: props.context,
+        description: props.description,
+        isDarkTheme: props.isDarkTheme,
+        environmentMessage: props.environmentMessage,
+        hasTeamsContext: props.hasTeamsContext,
+        userDisplayName: props.userDisplayName,
+    }
 
+    const renderPage = (): JSX.Element => {
         switch (page) {
             case 'oferta':
                 return <OfertaMaterias {...sharedProps} />
@@ -33,43 +32,58 @@ const AppCircoStudia = (props: IAppCircoStudiaProps): JSX.Element => {
     }
 
     return (
-        <Stack horizontal styles={{ root: { height: '100vh' } }}>
-            <Nav
-                selectedKey={page}
-                onLinkClick={(ev, item) => item && setPage(item.key!)}
-                groups={[
-                    {
-                        links: [
-                            {
-                                name: 'Oferta',
-                                key: 'oferta',
-                                icon: 'Education',
-                                url: '#',
-                            },
-                            {
-                                name: 'Plan de estudio',
-                                key: 'plan',
-                                icon: 'BulletedList',
-                                url: '#',
-                            },
-                            {
-                                name: 'Historial',
-                                key: 'historial',
-                                icon: 'ReportDocument',
-                                url: '#',
-                            },
-                        ],
+        <Stack styles={{ root: { height: '100vh' } }}>
+            {/* Barra superior */}
+            <Stack
+                horizontal
+                tokens={{ childrenGap: 10, padding: 20 }}
+                styles={{
+                    root: {
+                        backgroundColor: props.isDarkTheme ? '#333' : '#f3f2f1',
+                        borderBottom: '1px solid #ccc',
                     },
-                ]}
-                styles={{ root: { width: 250, borderRight: '1px solid #ddd' } }}
-            />
+                }}
+            >
+                <DefaultButton
+                    text='Oferta'
+                    iconProps={{ iconName: 'Education' }}
+                    onClick={() => setPage('oferta')}
+                    styles={{
+                        root: {
+                            fontWeight: page === 'oferta' ? 'bold' : 'normal',
+                        },
+                    }}
+                />
+                <DefaultButton
+                    text='Plan de estudio'
+                    iconProps={{ iconName: 'BulletedList' }}
+                    onClick={() => setPage('plan')}
+                    styles={{
+                        root: {
+                            fontWeight: page === 'plan' ? 'bold' : 'normal',
+                        },
+                    }}
+                />
+                <DefaultButton
+                    text='Historial'
+                    iconProps={{ iconName: 'ReportDocument' }}
+                    onClick={() => setPage('historial')}
+                    styles={{
+                        root: {
+                            fontWeight:
+                                page === 'historial' ? 'bold' : 'normal',
+                        },
+                    }}
+                />
+            </Stack>
+
+            {/* Contenido */}
             <Stack
                 grow
                 styles={{
                     root: {
                         padding: 20,
                         overflowY: 'auto',
-                        maxHeight: '100vh',
                     },
                 }}
             >
